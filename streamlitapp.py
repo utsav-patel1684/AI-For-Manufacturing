@@ -32,12 +32,14 @@ st.caption(
 # Cache the model loading for faster performance
 @st.cache_resource
 def load_model():
-    url = "https://drive.google.com/file/d/1uQtb34xuPwaY4TlX43ZujiePWsjeXygs/view?usp=drive_link"
+    # Direct download link format
+    file_id = "1uQtb34xuPwaY4TlX43ZujiePWsjeXygs"
+    url = f"https://drive.google.com/uc?export=download&id={file_id}"
     response = requests.get(url)
-    with open("voting_model.pkl", "wb") as f:
-        f.write(response.content)
-    with open("voting_model.pkl", "rb") as f:
-        model = pickle.load(f)
+    response.raise_for_status()  # Raise error if download fails
+
+    # Load model from bytes
+    model = pickle.load(BytesIO(response.content))
     return model
 
 voting_model = load_model()
