@@ -1,12 +1,14 @@
 # Import the required libraries
 import streamlit as st
 import pickle
+import sklearn
 import numpy as np
 import pandas as pd
 from PIL import Image
 import io
 
 # Set the page configuration
+print(sklearn.__version__)
 st.set_page_config(
     page_title="Timelytics - Supply Chain Forecasting",
     page_icon="🕒",
