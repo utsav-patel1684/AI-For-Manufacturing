@@ -1,5 +1,6 @@
 # Import the required libraries
 import streamlit as st
+import os
 import pickle
 import numpy as np
 import pandas as pd
@@ -31,7 +32,11 @@ st.caption(
 # Cache the model loading for faster performance
 @st.cache_resource
 def load_model():
-    with open("./voting_model.pkl", "rb") as file:
+    model_path = "voting_model.pkl"
+    if not os.path.exists(model_path):
+        st.error(f"Model file not found at {model_path}")
+        st.stop()
+    with open(model_path, "rb") as file:
         return pickle.load(file)
 
 voting_model = load_model()
