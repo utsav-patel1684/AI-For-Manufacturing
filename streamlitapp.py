@@ -111,4 +111,4 @@ if uploaded_model is not None:
     st.dataframe(df, use_container_width=True)
 
 else:
-    st.warning("Please upload your trained `.pkl` model file to continue.")
+    st.warning("📂 Please upload your trained `.pkl` model file to continue.")
